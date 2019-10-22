@@ -1,25 +1,21 @@
 "use strict";
-const modalMain = document.getElementById("modal_main");
-modalMain.classList.add("modal_active");
-const closeModal = document.getElementsByClassName("modal__close_times");
+const menuLink = document.getElementsByClassName("menu__link");
+const menuSub = document.querySelectorAll("ul.menu_sub");
 
-// смена кнопок
-const changeButton1 = document.querySelector(".show-success");
-const changeButton2 = document.getElementById("modal_success");
-changeButton1.onclick = function() {
-  changeButton2.classList.add("modal_active");
-  modalMain.classList.remove("modal_active");
-};
+function removeActive() {
+  for (let i = 0; i < menuSub.length; i++) {
+    menuSub[i].classList.remove("menu_active");
+  }
+}
 
-// крестик для первой кнопки
-const firstCloseModalElement = closeModal.item(0);
-firstCloseModalElement.onclick = function() {
-  modalMain.classList.remove("modal_active");
-};
+for (let i = 0; i < menuLink.length; i++) {
+  menuLink[i].onclick = function() {
+    removeActive();
 
-// крестик для второй кнопки
-const secondCloseModalElement = closeModal.item(1);
-secondCloseModalElement.onclick = function() {
-  modalMain.classList.remove("modal_active");
-  changeButton2.classList.remove("modal_active");
-};
+    if (menuLink[i].nextElementSibling.classList.contains("menu_sub")) {
+      menuLink[i].nextElementSibling.classList.add("menu_active");
+      return false;
+    }
+  };
+}
+
