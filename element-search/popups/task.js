@@ -8,6 +8,7 @@ const changeButton1 = document.querySelector(".show-success");
 const changeButton2 = document.getElementById("modal_success");
 changeButton1.onclick = function() {
   changeButton2.classList.add("modal_active");
+  modalMain.classList.remove("modal_active");
 };
 
 // крестик для первой кнопки
