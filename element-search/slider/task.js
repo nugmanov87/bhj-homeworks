@@ -21,6 +21,7 @@ nextButton.onclick = function() {
   } else {
     slideNumber = 0;
     sliderImage.classList.remove("slider__item_active");
+    showSlides();
   }
 };
 
