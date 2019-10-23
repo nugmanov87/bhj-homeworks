@@ -23,3 +23,5 @@ secondCloseModalElement.onclick = function() {
   modalMain.classList.remove("modal_active");
   changeButton2.classList.remove("modal_active");
 };
+
+
