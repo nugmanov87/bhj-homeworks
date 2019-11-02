@@ -1,7 +1,6 @@
 const chat = document.querySelector(".chat-widget");
 const messagesChat = document.querySelector(".chat-widget__messages");
 const messageField = document.querySelector(".chat-widget__input");
-
 let hours = new Date().getHours();
 let minutes = new Date().getMinutes();
 
@@ -34,7 +33,6 @@ function messageRobot() {
     "Как к вам обращаться?",
     "Где вы живете?"
   ];
-
   const random = Math.floor(Math.random() * robotMessage.length);
   robotRandomMessage = robotMessage[random];
 
