@@ -1,17 +1,35 @@
-const question = document.querySelectorAll(".has-tooltip");
+let activeTool = null;
 
-for (let i = 0; i < question.length; i++) {
-  let answear = question[i].getBoundingClientRect();
-  let answearOnQuestion = `<div class="tooltip tooltip_active" style="left:${answear.x}px">${question[i].title}</div>`;
+document.addEventListener("click", e => {
+  let tooltip = e.target.getAttribute("title");
+  let position = e.target.dataset.position;
 
-  question[i].addEventListener("click", e => {
+  if (!e.target.classList.contains("has-tooltip")) return false;
+
+  if (activeTool !== null && activeTool.innerText === tooltip) {
+    activeTool.remove();
+    activeTool = null;
     e.preventDefault();
-    let title = e.target.getAttribute("title");
+  } else if (activeTool !== null) {
+    activeTool.remove();
+  }
 
-    if (e.target.classList.contains("tooltip_active")) {
-      title.remove();
-    } else {
-      e.target.insertAdjacentHTML("afterEnd", answearOnQuestion);
-    }
-  });
-}
+  let tooltipDiv = document.createElement("div");
+  tooltipDiv.className = "tooltip";
+  tooltipDiv.innerText = tooltip;
+  document.body.insertBefore(tooltipDiv, e.target);
+  tooltipDiv.classList.add("tooltip_active");
+
+  let coords = e.target.getBoundingClientRect();
+  let top = coords.top - tooltipDiv.offsetHeight - 5;
+  let left = coords.left + (e.target.offsetWidth - tooltipDiv.offsetWidth) / 2;
+
+  if (top < 0) top = coords.top + tooltipDiv.offsetHeight;
+  if (left < 0) left = coords.left;
+
+  tooltipDiv.style.top = top + "px";
+  tooltipDiv.style.left = left + "px";
+
+  activeTool = document.querySelector(".tooltip");
+  e.preventDefault();
+});
