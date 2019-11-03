@@ -2,7 +2,6 @@ let activeTool = null;
 
 document.addEventListener("click", e => {
   let tooltip = e.target.getAttribute("title");
-  let position = e.target.dataset.position;
 
   if (!e.target.classList.contains("has-tooltip")) return false;
 
