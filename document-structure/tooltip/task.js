@@ -6,8 +6,10 @@ for (let i = 0; i < question.length; i++) {
 
   question[i].addEventListener("click", e => {
     e.preventDefault();
-    if (e.target.nextElementSibling.classList.contains("tooltip_active")) {
-      e.target.nextElementSibling.remove();
+    let title = e.target.getAttribute("title");
+
+    if (e.target.classList.contains("tooltip_active")) {
+      title.remove();
     } else {
       e.target.insertAdjacentHTML("afterEnd", answearOnQuestion);
     }
