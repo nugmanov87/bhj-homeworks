@@ -6,8 +6,11 @@ document.addEventListener("click", e => {
   if (!e.target.classList.contains("has-tooltip")) return false;
 
   if (activeTool) {
+    let hintText = activeTool.innerText;
     activeTool.remove();
-    return false;
+    activeTool = null;
+
+    if (hintText === e.target.title) return;
   }
 
   let tooltipDiv = document.createElement("div");
