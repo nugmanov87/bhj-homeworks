@@ -21,7 +21,6 @@ function renderAnswer(answer) {
   arr = [];
   loader.classList.remove("loader_active");
 }
-
 if (fromLocalStorage !== null) {
   let answer = JSON.parse(fromLocalStorage);
 
@@ -36,6 +35,18 @@ if (fromLocalStorage !== null) {
       renderAnswer(answer);
 
       localStorage.setItem("preloader", xhr.responseText);
+    } else {
+      xhr.open("GET", "https://netology-slow-rest.herokuapp.com/");
+      xhr.send();
+
+      xhr.addEventListener("readystatechange", () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          let answer = JSON.parse(xhr.responseText);
+
+          renderAnswer(answer);
+          localStorage.setItem("preloader", xhr.responseText);
+        }
+      });
     }
   });
 }
