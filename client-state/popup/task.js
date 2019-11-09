@@ -21,8 +21,8 @@ window.addEventListener("load", function() {
   }
 });
 
-modalClose.addEventListener("click", function(event) {
-  event.target.closest(".modal").classList.remove("modal_active");
+modalClose.addEventListener("click", function(e) {
+  e.target.closest(".modal").classList.remove("modal_active");
 
   if (getCookie("modalOpen")) {
     return false;
@@ -31,7 +31,6 @@ modalClose.addEventListener("click", function(event) {
 
     date.setDate(date.getDate() + 1);
     date = date.toUTCString();
-
     document.cookie = "modalOpen=true; path=/; expires=" + date;
   }
 });

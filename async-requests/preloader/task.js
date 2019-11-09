@@ -4,36 +4,6 @@ let loader = document.getElementById("loader");
 let arr = [];
 let fromLocalStorage = localStorage.getItem("preloader");
 
-if (fromLocalStorage !== null) {
-  let answer = JSON.parse(fromLocalStorage);
-
-  renderAnswer(answer);
-
-  xhr.open("GET", "https://netology-slow-rest.herokuapp.com/");
-  xhr.send();
-
-  xhr.addEventListener("readystatechange", () => {
-    if (xhr.readyState === xhr.DONE && xhr.status === 200) {
-      answer = JSON.parse(xhr.responseText);
-
-      renderAnswer(answer);
-      localStorage.setItem("preloader", xhr.responseText);
-    }
-  });
-} else {
-  xhr.open("GET", "https://netology-slow-rest.herokuapp.com/");
-  xhr.send();
-
-  xhr.addEventListener("readystatechange", () => {
-    if (xhr.readyState === xhr.DONE && xhr.status === 200) {
-      let answer = JSON.parse(xhr.responseText);
-
-      renderAnswer(answer);
-      localStorage.setItem("preloader", xhr.responseText);
-    }
-  });
-}
-
 function renderAnswer(answer) {
   for (let valute in answer.response.Valute) {
     arr.push(answer.response.Valute[valute]);
@@ -58,4 +28,34 @@ function renderAnswer(answer) {
   items.innerHTML = render.join("");
   arr = [];
   loader.classList.remove("loader_active");
+}
+
+if (fromLocalStorage !== null) {
+  let answer = JSON.parse(fromLocalStorage);
+
+  renderAnswer(answer);
+
+  xhr.open("GET", "https://netology-slow-rest.herokuapp.com/");
+  xhr.send();
+
+  xhr.addEventListener("readystatechange", () => {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      answer = JSON.parse(xhr.responseText);
+
+      renderAnswer(answer);
+      localStorage.setItem("preloader", xhr.responseText);
+    }
+  });
+} else {
+  xhr.open("GET", "https://netology-slow-rest.herokuapp.com/");
+  xhr.send();
+
+  xhr.addEventListener("readystatechange", () => {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      let answer = JSON.parse(xhr.responseText);
+
+      renderAnswer(answer);
+      localStorage.setItem("preloader", xhr.responseText);
+    }
+  });
 }
