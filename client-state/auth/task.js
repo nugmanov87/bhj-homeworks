@@ -26,7 +26,7 @@ signinBtn.addEventListener("click", function() {
       } else {
         alert("Неверные логин/пароль");
       }
-      signinForm.reset();
     }
   };
 });
+
